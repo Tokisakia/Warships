@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>战舰世界海战棋</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="video-overlay">
+        <video id="intro-video" src="video.mp4" autoplay muted playsinline></video>
+        <div id="skip-prompt">按任意键或点击屏幕跳过</div>
+    </div>
+
+    <h1>战舰世界海战棋 (Warships Battles)</h1>
+
+    <div id="difficulty-screen" class="hidden">
+        <h2>选择难度开始游戏</h2>
+        <button id="easy-btn" class="difficulty-btn">初级 AI (随机)</button>
+        <button id="medium-btn" class="difficulty-btn">中级 AI (搜索)</button>
+        <button id="hard-btn" class="difficulty-btn">高级 AI (猎杀)</button>
+    </div>
+
+    <div id="game-container" class="hidden">
+
+        <div id="ship-dock">
+            <h3>你的舰队 (点击旋转)</h3>
+            </div>
+
+        <div id="board-area">
+            
+            <div id="player-board-container">
+                <h4>你的海域 (放置舰艇)</h4>
+                <div id="player-grid" class="grid-container"></div>
+            </div>
+
+            <div id="ai-board-container" class="hidden">
+                <h4>AI 海域 (发动攻击)</h4>
+                <div id="ai-grid" class="grid-container"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="controls" class="hidden">
+        <button id="confirm-placement-btn" disabled>确认部署</button>
+        <button id="start-player-turn-btn" class="hidden">开始你的回合</button>
+    </div>
+
+    <div id="status-message" class="hidden">
+        请从左侧拖动舰艇到你的海域进行部署。
+    </div>
+    
+    <audio id="game-bgm" src="bgm.mp3" loop></audio> 
+
+    <script src="game.js"></script>
+</body>
+</html>

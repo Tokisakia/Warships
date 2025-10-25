@@ -1,0 +1,222 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    
+    /* 背景图 */
+    background-image: url('background.png'); /* 替换为你自己的图片文件路径 */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+/* 视频播放器 */
+#video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#intro-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+#skip-prompt {
+    position: absolute;
+    bottom: 30px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    z-index: 101;
+    animation: fade-in 1s ease;
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+h1, h3, h4 {
+    text-align: center;
+    color: #003366;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+h1 {
+    margin-top: 10px;
+}
+
+/* 难度选择界面 */
+#difficulty-screen {
+    background-color: rgba(240, 248, 255, 0.9); 
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid #003366;
+}
+.difficulty-btn {
+    display: block;
+    width: 250px;
+    font-size: 1.2rem;
+    padding: 15px;
+    margin: 10px auto;
+}
+
+#game-container {
+    display: flex;
+    gap: 30px;
+    margin-top: 10px;
+    padding: 15px;
+    background-color: rgba(240, 248, 255, 0.8);
+    border-radius: 8px;
+}
+
+#ship-dock {
+    width: 200px;
+    padding: 10px;
+    background: #fdfdfd;
+    border: 2px solid #b0c4de;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 备选栏中的舰艇名称 */
+.ship-item-label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* 备选栏中的舰艇 */
+.ship-item {
+    background-color: #a9a9a9; 
+    border: 1px solid #333;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    cursor: grab;
+    display: flex;
+    flex-wrap: wrap; 
+}
+
+.ship-cell {
+    width: 30px;
+    height: 30px;
+    box-sizing: border-box; 
+    border: 1px solid #777;
+}
+
+/* 拖动时的样式 */
+.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+}
+
+/* 棋盘网格 */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(10, 30px);
+    grid-template-rows: repeat(10, 30px);
+    border: 2px solid #003366; 
+    background-color: rgba(255, 255, 255, 0.6); 
+}
+
+.grid-cell {
+    width: 30px;
+    height: 30px;
+    background-color: #dcdcdc; /* 初始灰色 */
+    border: 1px solid #b0c4de; 
+    box-sizing: border-box;
+}
+
+#ai-grid .grid-cell {
+    cursor: crosshair;
+}
+
+/* --- 状态颜色 --- */
+.grid-cell.ship {
+    background-color: #32cd32; /* 绿色 */
+}
+
+.grid-cell.drag-over {
+    background-color: #90ee90; /* 浅绿色 */
+}
+.grid-cell.drag-over-invalid {
+    background-color: #ffb6c1; /* 浅红色 */
+}
+
+/* 击中 */
+.grid-cell.hit {
+    background-color: #e74c3c; /* 红色 */
+    animation: hit-animation 0.3s ease;
+}
+
+/* 未击中 */
+.grid-cell.miss {
+    background-color: #f8f8f8; /* 白色 */
+    animation: miss-animation 0.3s ease;
+}
+
+@keyframes hit-animation {
+    0% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+@keyframes miss-animation {
+    0% { background-color: #999; }
+    100% { background-color: #f8f8f8; }
+}
+
+
+/* --- 控制和状态 --- */
+#controls {
+    margin: 15px;
+    padding: 10px;
+    background-color: rgba(240, 248, 255, 0.8);
+    border-radius: 5px;
+}
+
+button {
+    font-size: 1rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4682b4;
+    color: white;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+button:hover:not(:disabled) { background-color: #315a7d; }
+button:disabled { background-color: #c0c0c0; cursor: not-allowed; }
+
+#status-message {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #003366;
+    margin-top: 10px;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.hidden {
+    display: none !important;
+}
